@@ -1,5 +1,5 @@
-const url = 'https://api.coincap.io/v2'
-
+/*const url = 'https://api.coincap.io/v2'*/
+const url = 'https://rest.coincap.io/v3/assets?apiKey=522da37b8e2ea4b68ca971aa1f29ff227618fe9379a581f7bfa045ec86d22a68'
 function getAssets() {
   return fetch(`${url}/assets?limit=20`)
     .then((res) => res.json())
