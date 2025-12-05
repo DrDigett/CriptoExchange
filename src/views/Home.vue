@@ -17,16 +17,36 @@ export default {
     return {
       isLoading: false,
       assets: [],
+      pollInterval: null,
+      initialLoaded: false,
     }
   },
 
   created() {
-    this.isLoading = true
+    // carga inicial con loader
+    this.fetchAssets(true)
 
-    api
-      .getAssets()
-      .then((assets) => (this.assets = assets))
-      .finally(() => (this.isLoading = false))
+    // actualizar cada 15 segundos
+    this.pollInterval = setInterval(() => this.fetchAssets(false), 15000)
+  },
+
+  beforeDestroy() {
+    if (this.pollInterval) clearInterval(this.pollInterval)
+  },
+
+  methods: {
+    async fetchAssets(initial = false) {
+      if (initial) this.isLoading = true
+      try {
+        const assets = await api.getAssets()
+        this.assets = assets
+        this.initialLoaded = true
+      } catch (err) {
+        console.error('Error al obtener assets:', err)
+      } finally {
+        if (initial) this.isLoading = false
+      }
+    },
   },
 }
 </script>
