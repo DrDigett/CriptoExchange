@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "16": "^0.0.2",
     "@saeris/vue-spinners": "^1.0.8",
     "chart.js": "^2.8.0",
     "core-js": "^3.6.5",

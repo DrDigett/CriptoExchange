@@ -11,26 +11,26 @@ import PxHeader from '@/components/PxHeader'
 
 export default {
   name: 'App',
-  components: {PxHeader},
+  components: { PxHeader },
 
-  data (){
+  data() {
     return {
       links: [
         {
           title: 'BTC',
-          to: { name: 'coin-detail', params: { id: 'bitcoin' } }
+          to: { name: 'coin-detail', params: { id: 'bitcoin' } },
         },
         {
           title: 'ETH',
-          to: { name: 'coin-detail', params: { id: 'ethereum' } }
+          to: { name: 'coin-detail', params: { id: 'ethereum' } },
         },
         {
           title: 'USDT',
-          to: { name: 'coin-detail', params: { id: 'tether' } }
-        }
-      ]
+          to: { name: 'coin-detail', params: { id: 'tether' } },
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

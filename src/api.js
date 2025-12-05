@@ -1,40 +1,41 @@
-/*const url = 'https://api.coincap.io/v2'*/
-const url = 'https://rest.coincap.io/v3/assets?apiKey=522da37b8e2ea4b68ca971aa1f29ff227618fe9379a581f7bfa045ec86d22a68'
-function getAssets() {
-  return fetch(`${url}/assets?limit=20`)
+const BASE_URL = "https://rest.coincap.io/v3";
+const API_KEY = "522da37b8e2ea4b68ca971aa1f29ff227618fe9379a581f7bfa045ec86d22a68";
+
+function request(endpoint) {
+  const url = `${BASE_URL}${endpoint}${
+    endpoint.includes("?") ? "&" : "?"
+  }apiKey=${API_KEY}`;
+
+  return fetch(url)
     .then((res) => res.json())
-    .then((res) => res.data)
+    .then((res) => res.data);
+}
+
+function getAssets() {
+  return request("/assets?limit=20");
 }
 
 function getAsset(coin) {
-  return fetch(`${url}/assets/${coin}`)
-    .then((res) => res.json())
-    .then((res) => res.data)
+  return request(`/assets/${coin}`);
 }
 
 function getAssetHistory(coin) {
-  const now = new Date()
-  const end = now.getTime()
-  now.setDate(now.getDate() - 1)
-  const start = now.getTime()
+  const now = new Date();
+  const end = now.getTime();
+  now.setDate(now.getDate() - 1);
+  const start = now.getTime();
 
-  return fetch(
-    `${url}/assets/${coin}/history?interval=h1&start=${start}&end=${end}`
-  )
-    .then(res => res.json())
-    .then(res => res.data)
+  return request(
+    `/assets/${coin}/history?interval=h1&start=${start}&end=${end}`
+  );
 }
 
-function getMarkets (coin){
-  return fetch(`${url}/assets/${coin}/markets?limit=5`)
-    .then(res => res.json())
-    .then(res => res.data)
+function getMarkets(coin) {
+  return request(`/assets/${coin}/markets?limit=5`);
 }
 
-function getExchange(id){
-  return fetch(`${url}/exchanges/${id}`)
-  .then( res => res.json())
-  .then( res => res.data)
+function getExchange(id) {
+  return request(`/exchanges/${id}`);
 }
 
 export default {
@@ -42,5 +43,5 @@ export default {
   getAsset,
   getMarkets,
   getExchange,
-  getAssetHistory,
-}
+  getAssetHistory
+};
