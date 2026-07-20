@@ -168,18 +168,21 @@ export default {
     },
 
     min() {
+      if (!this.history.length) return 0
       return Math.min(
         ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
       )
     },
 
     max() {
+      if (!this.history.length) return 0
       return Math.max(
         ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
       )
     },
 
     avg() {
+      if (!this.history.length) return 0
       return (
         this.history.reduce((a, b) => a + parseFloat(b.priceUsd), 0) /
         this.history.length
@@ -228,6 +231,11 @@ export default {
           this.asset = asset
           this.history = history
           this.markets = markets
+        })
+        .catch(() => {
+          this.asset = {}
+          this.history = []
+          this.markets = []
         })
         .finally(() => (this.isLoading = false))
     },
