@@ -1,5 +1,5 @@
 const BASE_URL = "https://rest.coincap.io/v3";
-const API_KEY = "522da37b8e2ea4b68ca971aa1f29ff227618fe9379a581f7bfa045ec86d22a68";
+const API_KEY = "ae81c5180f06623ae7a60f4760843ace77b0cd35401a1f25eda7e60b48e9558f";
 
 function request(endpoint) {
   const url = `${BASE_URL}${endpoint}${
